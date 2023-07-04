@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const User = require('../model/user');
-const router = express.Router();
 const { upload } = require('../multer');
 const ErrorHandler = require('../utils/ErrorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
@@ -10,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const sendMail = require('../utils/sendMail');
 const sendToken = require('../utils/jwtToken');
 const { isAuthenticated, isAdmin } = require('../middleware/auth');
+const router = express.Router();
 
 router.post('/create-user', upload.single('file'), async (req, res, next) => {
   try {
@@ -40,7 +40,7 @@ router.post('/create-user', upload.single('file'), async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = `https://localhost:8000/activation/${activationToken}`;
+    const activationUrl = `http://localhost:8000/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -77,11 +77,11 @@ router.post(
       const newUser = jwt.verify(
         activation_token,
         process.env.ACTIVATION_SECRET
-      );
-
-      if (!newUser) {
-        return next(new ErrorHandler('Invalid token', 400));
-      }
+        );
+        
+        if (!newUser) {
+          return next(new ErrorHandler('Invalid token', 400));
+        }
       const { name, email, password, avatar } = newUser;
 
       let user = await User.findOne({ email });

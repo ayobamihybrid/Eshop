@@ -1,39 +1,57 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { server } from "../server";
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { server } from '../server';
+import { toast } from 'react-toastify';
 
 const ActivationPage = () => {
   const { activation_token } = useParams();
   const [error, setError] = useState(false);
 
+  // useEffect(() => {
+  //   if (activation_token) {
+  //     const sendRequest = async () => {
+  //       try {
+  //         const res = await axios.post(`${server2}user/activation`, {
+  //           activation_token,
+  //         });
+  //         console.log(res);
+  //       } catch (err) {
+  //         setError(true);
+  //       }
+  //     };
+  //     sendRequest();
+  //   }
+  // }, [activation_token]);
+
   useEffect(() => {
     if (activation_token) {
       const sendRequest = async () => {
         await axios
-          .post(`${server}/user/activation`, {
+          .post(`${server}/user/activation/:id`, {
             activation_token,
           })
           .then((res) => {
-            console.log(res);
+            toast.success(res.data.message);
           })
           .catch((err) => {
             setError(true);
+            toast.success(err);
           });
       };
       sendRequest();
     }
-  }, [activation_token]);
+  }, []);
 
   return (
     <div
       style={{
-        width: "100%",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       {error ? (
