@@ -9,27 +9,11 @@ const ActivationPage = () => {
   const { activation_token } = useParams();
   const [error, setError] = useState(false);
 
-  // useEffect(() => {
-  //   if (activation_token) {
-  //     const sendRequest = async () => {
-  //       try {
-  //         const res = await axios.post(`${server2}user/activation`, {
-  //           activation_token,
-  //         });
-  //         console.log(res);
-  //       } catch (err) {
-  //         setError(true);
-  //       }
-  //     };
-  //     sendRequest();
-  //   }
-  // }, [activation_token]);
-
   useEffect(() => {
     if (activation_token) {
       const sendRequest = async () => {
         await axios
-          .post(`${server}/user/activation/:id`, {
+          .post(`${server}/user/activation/`, {
             activation_token,
           })
           .then((res) => {
@@ -55,9 +39,9 @@ const ActivationPage = () => {
       }}
     >
       {error ? (
-        <p>Your token is expired!</p>
+        <p>{error.message}</p>
       ) : (
-        <p>Your account has been created suceessfully!</p>
+        <p>Your account has been created successfully!</p>
       )}
     </div>
   );

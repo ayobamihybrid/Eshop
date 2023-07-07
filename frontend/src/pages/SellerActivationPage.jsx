@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { server } from "../server";
+import { toast } from "react-toastify";
 
 const SellerActivationPage = () => {
   const { activation_token } = useParams();
@@ -16,7 +17,7 @@ const SellerActivationPage = () => {
             activation_token,
           })
           .then((res) => {
-            console.log(res);
+            toast.success(res.data.message);
           })
           .catch((err) => {
             setError(true);
