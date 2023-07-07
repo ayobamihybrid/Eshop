@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https://eshop-7fwi.onrender.com',
+    origin: 'https://ecommerceshop-eyag.onrender.com',
     credentials: true,
   })
 );
