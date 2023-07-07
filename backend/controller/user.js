@@ -8,6 +8,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const sendMail = require('../utils/sendMail');
 const sendToken = require('../utils/jwtToken');
+const cloudinary = require('cloudinary');
 const { isAuthenticated, isAdmin } = require('../middleware/auth');
 const router = express.Router();
 
@@ -17,25 +18,21 @@ router.post('/create-user', upload.single('file'), async (req, res, next) => {
     const userEmail = await User.findOne({ email });
 
     if (userEmail) {
-      const filename = req.file.filename;
-      const filePath = `uploads/${filename}`;
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.log(err);
-          res.status(500).json({ message: 'Error deleting file' });
-        }
-      });
       return next(new ErrorHandler('User already exists', 400));
     }
 
-    const filename = req.file.filename;
-    const fileUrl = path.join(filename);
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+      folder: 'avatars',
+    });
 
     const user = {
       name: name,
       email: email,
       password: password,
-      avatar: fileUrl,
+      avatar: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
     };
 
     const activationToken = createActivationToken(user);
