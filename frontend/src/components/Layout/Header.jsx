@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import styles from "../../styles/styles";
-import { categoriesData } from "../../static/data";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import styles from '../../styles/styles';
+import { categoriesData } from '../../static/data';
 import {
   AiOutlineHeart,
   AiOutlineSearch,
   AiOutlineShoppingCart,
-} from "react-icons/ai";
-import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
-import { BiMenuAltLeft } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
-import DropDown from "./DropDown";
-import Navbar from "./Navbar";
-import { useSelector } from "react-redux";
- 
-import Cart from "../cart/Cart";
-import Wishlist from "../Wishlist/Wishlist";
-import { RxCross1 } from "react-icons/rx";
+} from 'react-icons/ai';
+import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
+import { BiMenuAltLeft } from 'react-icons/bi';
+import { CgProfile } from 'react-icons/cg';
+import DropDown from './DropDown';
+import Navbar from './Navbar';
+import { useSelector } from 'react-redux';
+
+import Cart from '../cart/Cart';
+import Wishlist from '../Wishlist/Wishlist';
+import { RxCross1 } from 'react-icons/rx';
 
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -24,7 +24,7 @@ const Header = ({ activeHeading }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
   const { allProducts } = useSelector((state) => state.products);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
   const [dropDown, setDropDown] = useState(false);
@@ -44,7 +44,7 @@ const Header = ({ activeHeading }) => {
     setSearchData(filteredProducts);
   };
 
-  window.addEventListener("scroll", () => {
+  window.addEventListener('scroll', () => {
     if (window.scrollY > 90) {
       setActive(true);
     } else {
@@ -85,7 +85,7 @@ const Header = ({ activeHeading }) => {
                       <Link to={`/product/${i._id}`}>
                         <div className="w-full flex items-start-py-3">
                           <img
-                            src={` ${i.images[0]?.url}`}
+                            src={`${i.images[0]?.url}`}
                             alt=""
                             className="w-[40px] h-[40px] mr-[10px]"
                           />
@@ -99,9 +99,9 @@ const Header = ({ activeHeading }) => {
           </div>
 
           <div className={`${styles.button} hover:bg-gray-800`}>
-            <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
+            <Link to={`${isSeller ? '/dashboard' : '/shop-create'}`}>
               <h1 className="text-[#fff] flex items-center">
-                {isSeller ? "Go Dashboard" : "Become a Seller"}
+                {isSeller ? 'Go Dashboard' : 'Become a Seller'}
                 <IoIosArrowForward className="ml-1" />
               </h1>
             </Link>
@@ -111,7 +111,7 @@ const Header = ({ activeHeading }) => {
 
       <div
         className={`${
-          active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
+          active === true ? 'shadow-sm fixed top-0 left-0 z-10' : null
         } transition hidden 800px:flex items-center justify-between w-full bg-[#3321c8] h-[70px]`}
       >
         <div
@@ -204,7 +204,7 @@ const Header = ({ activeHeading }) => {
       {/* mobile header */}
       <div
         className={`${
-          active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
+          active === true ? 'shadow-sm fixed top-0 left-0 z-10' : null
         }
       w-full h-[60px] bg-[#fff] z-50 top-0 left-0 shadow-sm 800px:hidden`}
       >
@@ -281,7 +281,7 @@ const Header = ({ activeHeading }) => {
                     {searchData.map((i) => {
                       const d = i.name;
 
-                      const Product_name = d.replace(/\s+/g, "-");
+                      const Product_name = d.replace(/\s+/g, '-');
                       return (
                         <Link to={`/product/${Product_name}`}>
                           <div className="flex items-center">
@@ -316,7 +316,7 @@ const Header = ({ activeHeading }) => {
                   <div>
                     <Link to="/profile">
                       <img
-                        src={` ${user.avatar}`}
+                        src={`${user.avatar?.url}`}
                         alt=""
                         className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
                       />
