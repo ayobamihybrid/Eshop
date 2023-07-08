@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { server } from "../../server";
 import styles from "../../styles/styles";
 import Loader from "../Layout/Loader";
@@ -32,6 +32,7 @@ const ShopInfo = ({ isOwner }) => {
       withCredentials: true,
     });
     window.location.reload();
+    Navigate("/login");
   };
 
   const totalReviewsLength =

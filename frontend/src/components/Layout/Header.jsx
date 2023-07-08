@@ -115,7 +115,7 @@ const Header = ({ activeHeading }) => {
         } transition hidden 800px:flex items-center justify-between w-full bg-[#3321c8] h-[70px]`}
       >
         <div
-          className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
+          className={`${styles.section} relative ${styles.normalFlex} justify-between`}
         >
           {/* categories */}
           <div onClick={() => setDropDown(!dropDown)}>
@@ -140,12 +140,12 @@ const Header = ({ activeHeading }) => {
             </div>
           </div>
           {/* navitems */}
-          <div className={`${styles.noramlFlex}`}>
+          <div className={`${styles.normalFlex}`}>
             <Navbar active={activeHeading} />
           </div>
 
           <div className="flex">
-            <div className={`${styles.noramlFlex}`}>
+            <div className={`${styles.normalFlex}`}>
               <div
                 className="relative cursor-pointer mr-[15px]"
                 onClick={() => setOpenWishlist(true)}
@@ -157,7 +157,7 @@ const Header = ({ activeHeading }) => {
               </div>
             </div>
 
-            <div className={`${styles.noramlFlex}`}>
+            <div className={`${styles.normalFlex}`}>
               <div
                 className="relative cursor-pointer mr-[15px]"
                 onClick={() => setOpenCart(true)}
@@ -172,7 +172,7 @@ const Header = ({ activeHeading }) => {
               </div>
             </div>
 
-            <div className={`${styles.noramlFlex}`}>
+            <div className={`${styles.normalFlex}`}>
               <div className="relative cursor-pointer mr-[15px]">
                 {isAuthenticated ? (
                   <Link to="/profile">
