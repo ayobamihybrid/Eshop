@@ -32,7 +32,7 @@ const ShopInfo = ({ isOwner }) => {
       withCredentials: true,
     });
     Navigate("/login");
-    window.location.reload();
+    // window.location.reload();
   };
 
   const totalReviewsLength =
